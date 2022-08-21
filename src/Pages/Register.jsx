@@ -3,7 +3,7 @@ import RegisterComp from "../Components/Register/RegisterComp";
 
 const Register = () => {
   return (
-    <div>
+    <div className="mt-20">
       {" "}
       <RegisterComp />{" "}
     </div>

@@ -7,76 +7,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Close, Menu, Search } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Cart from "../Cart/Cart";
+import HandBagBox from "../HandBagBox/HandBagBox";
 
 const Header = () => {
   const [toggle, setToggle] = useState();
   const [cartToggle, setCartToggle] = useState(false);
 
-  const token = useSelector((state) => state.User.token);
-
   return (
     <div
-      className={` h-[40px] w-full  bg-[#333333] flex flex-col items-center fixed top-0  `}
+      className={` h-[40px] w-full  bg-[#333333] flex flex-col items-center `}
     >
-      <ul className="w-[50%]  h-full tablet:flex hidden items-center text-[#d6d6d6]  text-[11px] justify-around">
+      <ul className="w-[30%]  h-full tablet:flex hidden items-center text-[#d6d6d6]  text-[11px] justify-around">
         <li>
           <Link to={"/"} className="mr-3">
             <FontAwesomeIcon icon={faApple} className="w-[20px] h-[20px]" />
           </Link>
         </li>
         <li>
-          <Link to={"/"} className="">
-            Store
+          <Link to={"/products"} className="">
+            Products
+          </Link>
+        </li>
+        <li>
+          <Link to={"/faq"} className="">
+            FAQ
           </Link>
         </li>
         <li>
           <Link to={"/"} className="">
-            Mac
+            Messanger
           </Link>
         </li>
-        <li>
-          <Link to={"/"} className="">
-            iPad
-          </Link>
-        </li>
-        <li>
-          <Link to={"/"} className="">
-            iPhone
-          </Link>
-        </li>
-        <li>
-          <Link to={"/"} className="">
-            Watch
-          </Link>
-        </li>
-        <li>
-          <Link to={"/"} className="">
-            Airpods
-          </Link>
-        </li>
-        <li>
-          <Link to={"/"} className="">
-            TV & Home
-          </Link>
-        </li>
-        <li>
-          <Link to={"/"} className="">
-            Only on Apple
-          </Link>
-        </li>
-        <li>
-          <Link to={"/"} className="">
-            Assessories
-          </Link>
-        </li>
-        <li>
-          <Link to={"/"} className="">
-            Support
-          </Link>
-        </li>
+
         <li>
           <Link to={"/"} className="">
             <FontAwesomeIcon
@@ -85,20 +48,16 @@ const Header = () => {
             />
           </Link>
         </li>
-        {token && (
-          <li
-            onClick={() => {
-              setCartToggle(!cartToggle);
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faShoppingBag}
-              className="w-[15px] h-[20px]"
-            />
-          </li>
-        )}
+
+        <li
+          onClick={() => {
+            setCartToggle(!cartToggle);
+          }}
+        >
+          <FontAwesomeIcon icon={faShoppingBag} className="w-[15px] h-[20px]" />
+        </li>
       </ul>
-      {cartToggle && <Cart />}
+      {cartToggle && <HandBagBox />}
 
       <div className="tablet:hidden flex w-full mr-auto justify-between items-center px-2">
         {toggle ? (
@@ -148,53 +107,18 @@ const Header = () => {
         <div className="mx-10">
           <ul className=" w-full flex flex-col text-[#d6d6d6]  text-lg   ">
             <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                Store
+              <Link to={"/products"} className="">
+                Products
               </Link>
             </li>
             <li className=" border-b-[1px] py-3 border-[#363636]">
               <Link to={"/"} className="">
-                Mac
+                FAQ
               </Link>
             </li>
             <li className=" border-b-[1px] py-3 border-[#363636]">
               <Link to={"/"} className="">
-                iPad
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                iPhone
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                Watch
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                Airpods
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                TV & Home
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                Only on Apple
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                Assessories
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                Support
+                Messanger
               </Link>
             </li>
           </ul>
