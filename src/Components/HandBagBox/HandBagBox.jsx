@@ -33,7 +33,7 @@ const HandBagBox = () => {
     dispatch(deleteCartProduct(productId, token));
   };
   return (
-    <div className="w-[300px] h-[300px] border-2 shadow-lg fixed top-[50px] right-[550px]  tablet:flex hidden flex-col bg-white p-2 rounded-[12px]">
+    <div className="tablet:w-[300px] w-full h-[300px] border-2 shadow-lg tablet:fixed absolute  tablet:top-[50px] top-10 tablet:right-[550px]  flex  flex-col bg-white p-2 tablet:rounded-[12px]">
       <div className="w-full min-h-[100px] max-h-full p-4 overflow-y-auto">
         {cartItems.length > 0 ? (
           cartItems.map((cart, i) => (

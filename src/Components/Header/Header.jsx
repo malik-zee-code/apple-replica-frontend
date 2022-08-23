@@ -59,37 +59,43 @@ const Header = () => {
       </ul>
       {cartToggle && <HandBagBox />}
 
-      <div className="tablet:hidden flex w-full mr-auto justify-between items-center px-2">
-        {toggle ? (
-          <IconButton
-            className="w-[40px] h-[40px] "
-            onClick={() => setToggle(false)}
-          >
-            <Close className="text-[#dfdfdf]" />
-          </IconButton>
-        ) : (
-          <IconButton
-            className="w-[40px] h-[40px] "
-            onClick={() => setToggle(true)}
-          >
-            <Menu className="text-[#dfdfdf]" />
-          </IconButton>
-        )}
-
-        <Link to={"/"} className="mr-3">
-          <FontAwesomeIcon
-            icon={faApple}
-            className="w-[25px] h-[25px] text-[#dfdfdf]"
-          />
-        </Link>
-
-        <Link to={"/"} className="">
+      <ul className="tablet:hidden flex w-full mr-auto justify-between items-center px-2">
+        <li>
+          {toggle ? (
+            <IconButton
+              className="w-[40px] h-[40px] "
+              onClick={() => setToggle(false)}
+            >
+              <Close className="text-[#dfdfdf]" />
+            </IconButton>
+          ) : (
+            <IconButton
+              className="w-[40px] h-[40px] "
+              onClick={() => setToggle(true)}
+            >
+              <Menu className="text-[#dfdfdf]" />
+            </IconButton>
+          )}
+        </li>
+        <li>
+          <Link to={"/"} className="mr-3">
+            <FontAwesomeIcon
+              icon={faApple}
+              className="w-[25px] h-[25px] text-[#dfdfdf]"
+            />
+          </Link>
+        </li>
+        <li
+          onClick={() => {
+            setCartToggle(!cartToggle);
+          }}
+        >
           <FontAwesomeIcon
             icon={faShoppingBag}
             className="w-[15px] h-[15px] text-[#dfdfdf]"
           />
-        </Link>
-      </div>
+        </li>
+      </ul>
       <div
         className={` w-full tablet:hidden ${
           toggle ? "-translate-y-0 mt-10" : "-translate-y-full mt-0"
