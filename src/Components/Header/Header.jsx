@@ -118,7 +118,7 @@ const Header = () => {
               </Link>
             </li>
             <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
+              <Link to={"/faq"} className="">
                 FAQ
               </Link>
             </li>
