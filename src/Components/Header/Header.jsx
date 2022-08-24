@@ -103,7 +103,7 @@ const Header = () => {
       <div
         className={` w-full tablet:hidden ${
           toggle ? "-translate-y-0 mt-10" : "-translate-y-full mt-0"
-        }  ease-out duration-500 h-screen absolute  left-0 bg-black`}
+        }  ease-out duration-500 h-screen absolute  left-0 bg-black z-20`}
       >
         <div className="bg-[#1f1f1f] p-2 rounded-md flex m-4">
           <Search className="" />

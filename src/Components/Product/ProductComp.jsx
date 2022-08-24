@@ -61,7 +61,7 @@ const ProductComp = () => {
                   ${p.price}
                 </span>
                 <StarsRating
-                  className=" w-[140px] flex justify-between"
+                  className=" w-[140px] flex justify-between "
                   count={5}
                   size={42}
                   color2={"#ffd700"}
