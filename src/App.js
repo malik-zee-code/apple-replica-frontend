@@ -7,7 +7,7 @@ import Header from "./Components/Header/Header";
 import Login from "./Pages/Login";
 import FAQ from "./Pages/FAQ";
 import AddFaq from "./Pages/AddFaq";
-import Footer from "./Components/footer/Footer";
+// import Footer from "./Components/footer/Footer";
 import Home from "./Pages/Home";
 import Products from "./Pages/Products";
 
@@ -39,7 +39,7 @@ const App = () => {
         <Route path="/products" element={<Products />} />
       </Routes>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

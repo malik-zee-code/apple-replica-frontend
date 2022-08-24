@@ -7,12 +7,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Close, Menu, Search } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { CartActions } from "../../Redux/Cart/CartSlice";
 import HandBagBox from "../HandBagBox/HandBagBox";
 
 const Header = () => {
   const [toggle, setToggle] = useState();
-  const [cartToggle, setCartToggle] = useState(false);
+  // const [cartToggle, setCartToggle] = useState(false);
+  const cartToggle = useSelector((state) => state.Cart.cartToggle);
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -51,7 +55,7 @@ const Header = () => {
 
         <li
           onClick={() => {
-            setCartToggle(!cartToggle);
+            dispatch(CartActions.toggleCart());
           }}
         >
           <FontAwesomeIcon icon={faShoppingBag} className="w-[15px] h-[20px]" />
@@ -87,7 +91,7 @@ const Header = () => {
         </li>
         <li
           onClick={() => {
-            setCartToggle(!cartToggle);
+            dispatch(CartActions.toggleCart());
           }}
         >
           <FontAwesomeIcon
@@ -111,23 +115,32 @@ const Header = () => {
         </div>
         <hr className="my-5 border-[#363636]" />
         <div className="mx-10">
-          <ul className=" w-full flex flex-col text-[#d6d6d6]  text-lg   ">
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/products"} className="">
-                Products
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/faq"} className="">
-                FAQ
-              </Link>
-            </li>
-            <li className=" border-b-[1px] py-3 border-[#363636]">
-              <Link to={"/"} className="">
-                Messanger
-              </Link>
-            </li>
-          </ul>
+          <div className=" w-full flex flex-col text-[#d6d6d6]  text-lg   ">
+            <Link
+              to={"/products"}
+              // className=""
+              className="w-full border-b-[1px] py-3 border-[#363636]"
+              onClick={() => setToggle(false)}
+            >
+              Products
+            </Link>
+
+            <Link
+              to={"/faq"}
+              className="w-full border-b-[1px] py-3 border-[#363636]"
+              onClick={() => setToggle(false)}
+            >
+              FAQ
+            </Link>
+
+            <Link
+              to={"/"}
+              className="w-full border-b-[1px] py-3 border-[#363636]"
+              onClick={() => setToggle(false)}
+            >
+              Messanger
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -4,12 +4,16 @@ const initialState = {
   cartItems: [],
   isLoading: false,
   error: false,
+  cartToggle: false,
 };
 
 const CartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    toggleCart: (state, action) => {
+      return { ...state, cartToggle: !state.cartToggle };
+    },
     getCartProducts: (state, action) => {
       console.log(action.payload);
       return {

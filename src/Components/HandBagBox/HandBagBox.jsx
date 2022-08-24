@@ -15,6 +15,7 @@ import {
   resetCartProducts,
 } from "../../Redux/Cart/action-creators";
 import { Reset } from "../../Redux/User/action-creators";
+import { CartActions } from "../../Redux/Cart/CartSlice";
 
 const HandBagBox = () => {
   const cartItems = useSelector((state) => state.Cart.cartItems);
@@ -23,6 +24,7 @@ const HandBagBox = () => {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
+    dispatch(CartActions.toggleCart());
     dispatch(resetCartProducts());
     dispatch(Reset());
     localStorage.removeItem("token");
@@ -73,7 +75,10 @@ const HandBagBox = () => {
       </div>
       <nav className="w-full mt-auto flex">
         <ul className="w-full h-full mt-auto">
-          <li className="py-3 border-y-[2px] text-sm hover:underline hover:text-indigo-700 text-indigo-700  flex items-center">
+          <li
+            className="py-3 border-y-[2px] text-sm hover:underline hover:text-indigo-700 text-indigo-700  flex items-center"
+            onClick={() => dispatch(CartActions.toggleCart())}
+          >
             <FontAwesomeIcon icon={faBoxOpen} className="h-4 mr-3" />
             Orders
           </li>
@@ -81,14 +86,20 @@ const HandBagBox = () => {
             <>
               <li
                 className="py-3 border-b-[2px] text-sm hover:underline hover:text-indigo-700 text-indigo-700  flex items-center"
-                onClick={() => navigate("/register")}
+                onClick={() => {
+                  navigate("/register");
+                  dispatch(CartActions.toggleCart());
+                }}
               >
                 <FontAwesomeIcon icon={faUserPlus} className="h-4 mr-3" />
                 Create an Account
               </li>
               <li
                 className="py-3  text-sm hover:underline hover:text-indigo-700 text-indigo-700 flex items-center"
-                onClick={() => navigate("/signin")}
+                onClick={() => {
+                  navigate("/signin");
+                  dispatch(CartActions.toggleCart());
+                }}
               >
                 <FontAwesomeIcon icon={faCircleUser} className="h-4 mr-4" />
                 Login
