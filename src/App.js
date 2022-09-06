@@ -7,13 +7,14 @@ import Header from "./Components/Header/Header";
 import Login from "./Pages/Login";
 import FAQ from "./Pages/FAQ";
 import AddFaq from "./Pages/AddFaq";
-// import Footer from "./Components/footer/Footer";
 import Home from "./Pages/Home";
 import Products from "./Pages/Products";
+import ProductDetail from "./Pages/ProductDetail";
+import AddProduct from "./Pages/AddProduct";
 
 const App = () => {
   return (
-    <div className="App min-h-screen bg-white flex flex-col">
+    <div className="App min-h-screen bg-white flex flex-col ">
       <ToastContainer />
       <Header />
       <Routes>
@@ -37,6 +38,8 @@ const App = () => {
         <Route path="/addfaq" element={<AddFaq />} />
         <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:productId" element={<ProductDetail />} />
+        <Route path="/products/addProduct" element={<AddProduct />} />
       </Routes>
 
       {/* <Footer /> */}

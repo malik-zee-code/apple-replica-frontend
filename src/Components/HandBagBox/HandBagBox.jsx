@@ -16,8 +16,9 @@ import {
 } from "../../Redux/Cart/action-creators";
 import { Reset } from "../../Redux/User/action-creators";
 import { CartActions } from "../../Redux/Cart/CartSlice";
+import HandBox from "./HandBox";
 
-const HandBagBox = () => {
+const HandBagBox = (props) => {
   const cartItems = useSelector((state) => state.Cart.cartItems);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -34,8 +35,12 @@ const HandBagBox = () => {
   const handleDeleteCartProduct = (productId) => {
     dispatch(deleteCartProduct(productId, token));
   };
+
   return (
-    <div className="tablet:w-[300px] w-full h-[300px] border-2 shadow-lg tablet:fixed absolute  tablet:top-[50px] top-10 tablet:right-[550px]  flex  flex-col bg-white p-2 tablet:rounded-[12px]">
+    <HandBox
+      className="z-50 tablet:w-[300px] w-full h-[300px] border-2 shadow-lg tablet:fixed absolute  tablet:top-[50px] top-10 tablet:right-[550px]  flex  flex-col bg-white p-2 tablet:rounded-[12px]"
+      onClickOutside={() => dispatch(CartActions.toggleCart())}
+    >
       <div className="w-full min-h-[100px] max-h-full p-4 overflow-y-auto">
         {cartItems.length > 0 ? (
           cartItems.map((cart, i) => (
@@ -116,7 +121,7 @@ const HandBagBox = () => {
           )}
         </ul>
       </nav>
-    </div>
+    </HandBox>
   );
 };
 
