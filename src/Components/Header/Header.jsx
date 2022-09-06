@@ -16,6 +16,7 @@ const Header = () => {
   const [toggle, setToggle] = useState();
   // const [cartToggle, setCartToggle] = useState(false);
   const cartToggle = useSelector((state) => state.Cart.cartToggle);
+  const userType = useSelector((state) => state.User.userData.userType);
   const dispatch = useDispatch();
 
   return (
@@ -33,6 +34,13 @@ const Header = () => {
             Products
           </Link>
         </li>
+        {userType === "Admin" && (
+          <li>
+            <Link to={"/products/addproduct"} className="">
+              Add Product
+            </Link>
+          </li>
+        )}
         <li>
           <Link to={"/faq"} className="">
             FAQ
@@ -124,6 +132,17 @@ const Header = () => {
             >
               Products
             </Link>
+
+            {userType === "Admin" && (
+              <Link
+                to={"/products/addproduct"}
+                // className=""
+                className="w-full border-b-[1px] py-3 border-[#363636]"
+                onClick={() => setToggle(false)}
+              >
+                Add Product
+              </Link>
+            )}
 
             <Link
               to={"/faq"}

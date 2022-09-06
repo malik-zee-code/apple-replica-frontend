@@ -16,6 +16,7 @@ const AddProductComp = () => {
   const navigate = useNavigate();
 
   const handleProductImages = (e) => {
+    state.pictures = [];
     const file = e.target.files;
     for (let f of file) {
       console.log(f);
@@ -103,7 +104,7 @@ const AddProductComp = () => {
           </div>
         </div>
         <div className="w-full flex justify-center">
-          <div className="w-full">
+          <div className="w-full flex flex-col">
             <span className="text-slate-600">Add Product Images</span>
             <input
               type="file"
