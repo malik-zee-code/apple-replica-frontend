@@ -53,7 +53,7 @@ const ProductComp = () => {
             products.map((p, i) => (
               <div
                 onClick={() => navigate(`${p._id}`)}
-                className="w-[300px] my-3 hover:scale-105 ease-in duration-100 h-[400px] bg-white shadow-lg hover:shadow-2xl rounded-lg flex flex-col"
+                className="w-[300px] cursor-pointer my-3 hover:scale-105 ease-in duration-100 h-[400px] bg-white shadow-lg hover:shadow-2xl rounded-lg flex flex-col"
                 key={i}
               >
                 <img
