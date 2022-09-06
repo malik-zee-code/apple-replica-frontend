@@ -1,10 +1,11 @@
-import { Rating } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+import { IconButton, Rating } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
 import Carousel from "react-elastic-carousel";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addtoCart, updateCartProduct } from "../../Redux/Cart/action-creators";
 import Spinner from "../../UI/Spinner";
@@ -16,8 +17,37 @@ const ProductDetailComp = () => {
   const [quantity, setQuantity] = useState(1);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const token = localStorage.getItem("token");
+  const userType = useSelector((state) => state.User.userData.userType);
+
+  const config = {
+    headers: {
+      "x-auth-token": token,
+    },
+  };
+  const deleteHandler = () => {
+    axios
+      .delete(
+        `${process.env.REACT_APP_API}/product/${params.productId}`,
+        config
+      )
+      .then((d) => {
+        navigate("/products");
+      })
+      .catch((err) => {
+        toast.error(`${err.response.data.error}!`, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
 
   const calcAverageReview = () => {
     const totalLength = product?.reviews?.length;
@@ -93,19 +123,32 @@ const ProductDetailComp = () => {
       ) : (
         <div className="w-[80%] min-h-full bg-white mt-20 text-black flex flex-col ">
           <div className="w-full flex ">
-            <div className=" min-w-[700px] w-[1000px] ">
-              <Carousel itemsToShow={1}>
-                {product?.pictures?.map((p) => (
-                  <img src={p} alt="" />
-                ))}
-              </Carousel>
-            </div>
+            {product?.pictures?.length > 0 && (
+              <div className=" min-w-[700px] w-[1000px] ">
+                <Carousel itemsToShow={1}>
+                  {product?.pictures?.map((p, i) => (
+                    <img src={p} alt="" key={i} />
+                  ))}
+                </Carousel>
+              </div>
+            )}
             <div className="bg-white h-full w-full flex-1 ml-14 flex flex-col">
               <div className="w-ful flex flex-col ">
-                <div>
+                <div className="flex justify-between">
                   <h3 className="font-sans text-3xl">{product.name}</h3>
-                  <hr className="w-[3em] border-2 border-slate-800 rounded-full" />
+                  {userType === "Admin" && (
+                    <div className="">
+                      <IconButton className="" onClick={() => navigate("edit")}>
+                        <Edit className="text-green-400" />
+                      </IconButton>
+                      <IconButton onClick={deleteHandler}>
+                        <Delete className="text-red-600" />
+                      </IconButton>
+                    </div>
+                  )}
                 </div>
+                <hr className="w-[3em] border-2 border-slate-800 rounded-full" />
+                <div className=""></div>
                 <span className="text-2xl font-medium mt-6">
                   ${product.price}
                 </span>

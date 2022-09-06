@@ -114,7 +114,7 @@ const ReviewComp = ({ reviews, productId }) => {
         {reviews.map((r, i) => (
           <div className=" mt-10" key={i}>
             <div className="flex flex-col">
-              <div className="font-medium capitalize flex items-center justify-between">
+              <div className="font-medium capitalize flex text-lg items-center justify-between">
                 {r.author.username}
 
                 {userType === "Admin" && (
