@@ -109,7 +109,7 @@ const ReviewComp = ({ reviews, productId }) => {
           </div>
         )}
       </div>
-      <div className="flex-1 ml-8 lg:mt-0 mt-10">
+      <div className="flex-1 lg:ml-8 ml-0 lg:mt-0 mt-10">
         <span className="text-2xl font-semibold">Reviews</span>
         {reviews.map((r, i) => (
           <div className=" mt-10" key={i}>
