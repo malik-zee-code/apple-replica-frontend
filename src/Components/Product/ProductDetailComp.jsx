@@ -3,10 +3,12 @@ import { IconButton, Rating } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
-import Carousel from "react-elastic-carousel";
+// import Carousel from "react-elastic-carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Keyboard, Pagination, Navigation } from "swiper";
 import { addtoCart, updateCartProduct } from "../../Redux/Cart/action-creators";
 import Spinner from "../../UI/Spinner";
 import ReviewComp from "./ReviewComp";
@@ -116,23 +118,69 @@ const ProductDetailComp = () => {
     fetchProduct();
   }, [fetchProduct]);
 
+  // const [dimensions, setDimensions] = React.useState({
+  //   height: window.innerHeight,
+  //   width: window.innerWidth,
+  // });
+  // const handleResize = () => {
+  //   setDimensions({
+  //     height: window.innerHeight,
+  //     width: window.innerWidth,
+  //   });
+  // };
+  // window.addEventListener("resize", handleResize);
+
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="w-[80%] min-h-full bg-white mt-20 text-black flex flex-col ">
-          <div className="w-full flex ">
+          <div className="w-full  flex flex-col md:flex-row ">
             {product?.pictures?.length > 0 && (
-              <div className=" min-w-[700px] w-[1000px] ">
-                <Carousel itemsToShow={1}>
-                  {product?.pictures?.map((p, i) => (
-                    <img src={p} alt="" key={i} />
-                  ))}
-                </Carousel>
+              <div className="min-w-400px  sm:max-w-[600px] md:min-w-[700px] lg:min-w-[1000px]  ">
+                {/* {window.innerWidth < 640 ? ( */}
+                  <Swiper
+                    slidesPerView={1}
+                    spaceBetween={30}
+                    keyboard={{
+                      enabled: true,
+                    }}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    navigation={true}
+                    modules={[Keyboard, Pagination, Navigation]}
+                    className="mySwiper p-7 mt-4 !h-[250px] rounded-md md:mb-0 mb-10   md:!h-[500px]"
+                  >
+                    {product.pictures?.map((p, i) => (
+                      <SwiperSlide key={i}>
+                        <img src={p} alt="" />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                {/* ) : (
+                  <Carousel
+                    //  className="!min-h-full"
+                    // style={{
+                    //   minHeight: "100% !important",
+                    // }}
+                    itemsToShow={1}
+                    breakPoints={[
+                      { width: 1, itemsToShow: 1 },
+                      {
+                        width: 550,
+                      },
+                    ]}
+                  >
+                    {product?.pictures?.map((p, i) => (
+                      <img src={p} alt="" key={i} />
+                    ))}
+                  </Carousel>
+                )} */}
               </div>
             )}
-            <div className="bg-white h-full w-full flex-1 ml-14 flex flex-col">
+            <div className="bg-white h-full w-full flex-1 md:ml-14 ml-0 flex flex-col">
               <div className="w-ful flex flex-col ">
                 <div className="flex justify-between">
                   <h3 className="font-sans text-3xl">{product.name}</h3>

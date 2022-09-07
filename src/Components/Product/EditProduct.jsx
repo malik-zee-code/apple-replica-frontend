@@ -103,7 +103,7 @@ const EditProduct = () => {
     <>
       {product ? (
         <div className="flex justify-center">
-          <div className="w-[850px] h-[700px] shadow-lg my-20 rounded-md p-4 flex flex-col ">
+          <div className="w-[850px] min-h-[700px] shadow-lg my-20 rounded-md p-4 flex flex-col ">
             <h3 className="text-lg font-semibold text-black ">Edit Product</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 mt-16 gap-3">
@@ -194,7 +194,7 @@ const EditProduct = () => {
             <button
               className={` ${
                 isLoading && "loading"
-              } btn no-animation px-3 py-2 bg-slate-800 w-full  rounded-md my-auto text-white font-semibold `}
+              } btn no-animation px-3 py-2 bg-slate-800 w-full  rounded-md mt-4 md:my-auto text-white font-semibold `}
               onClick={handleSubmit}
             >
               Update

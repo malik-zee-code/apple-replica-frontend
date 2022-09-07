@@ -72,7 +72,7 @@ const ReviewComp = ({ reviews, productId }) => {
       });
   };
   return (
-    <div className="mt-52 flex ">
+    <div className="mt-52 flex lg:flex-row flex-col ">
       <div className="flex-1">
         <span className="text-2xl font-semibold">Add Review</span>
 
@@ -91,7 +91,7 @@ const ReviewComp = ({ reviews, productId }) => {
                 id=""
                 cols="10"
                 rows="8"
-                className="border outline-none p-2 w-[500px] mt-2"
+                className="border outline-none p-2 max-w-[500px] mt-2"
                 onChange={(e) => setData({ ...data, body: e.target.value })}
               ></textarea>
               <button
@@ -109,7 +109,7 @@ const ReviewComp = ({ reviews, productId }) => {
           </div>
         )}
       </div>
-      <div className="flex-1 ml-8">
+      <div className="flex-1 ml-8 lg:mt-0 mt-10">
         <span className="text-2xl font-semibold">Reviews</span>
         {reviews.map((r, i) => (
           <div className=" mt-10" key={i}>
@@ -138,7 +138,7 @@ const ReviewComp = ({ reviews, productId }) => {
               <div className="flex justify-center mt-4 w-full my-4 ">
                 <span className="flex items-center text-slate-300">
                   &#8859;{" "}
-                  <hr className="border border-slate-300 w-[25em] mx-4" />{" "}
+                  <hr className="border border-slate-300 min-w-[12em] max-w-[25em] mx-4" />{" "}
                   &#8859;
                 </span>
               </div>
