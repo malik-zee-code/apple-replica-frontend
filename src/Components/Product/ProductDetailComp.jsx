@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Pagination, Navigation } from "swiper";
+import { Keyboard, Lazy,Pagination, Navigation } from "swiper";
 import { addtoCart, updateCartProduct } from "../../Redux/Cart/action-creators";
 import Spinner from "../../UI/Spinner";
 import ReviewComp from "./ReviewComp";
+import placeholder from "../Assets/image-placeholder-base.webp";
 
 const ProductDetailComp = () => {
   const [product, setProduct] = useState({});
@@ -60,11 +61,6 @@ const ProductDetailComp = () => {
     return total / totalLength;
   };
 
-  // const config = {
-  //   headers: {
-  //     "x-auth-token": token,
-  //   },
-  // };
   const fetchProduct = useCallback(() => {
     console.log(params.productId);
     setIsLoading(true);
@@ -118,18 +114,6 @@ const ProductDetailComp = () => {
     fetchProduct();
   }, [fetchProduct]);
 
-  // const [dimensions, setDimensions] = React.useState({
-  //   height: window.innerHeight,
-  //   width: window.innerWidth,
-  // });
-  // const handleResize = () => {
-  //   setDimensions({
-  //     height: window.innerHeight,
-  //     width: window.innerWidth,
-  //   });
-  // };
-  // window.addEventListener("resize", handleResize);
-
   return (
     <>
       {isLoading ? (
@@ -137,49 +121,33 @@ const ProductDetailComp = () => {
       ) : (
         <div className="w-[80%] min-h-full bg-white mt-20 text-black flex flex-col ">
           <div className="w-full  flex flex-col md:flex-row ">
-            {product?.pictures?.length > 0 && (
-              <div className="min-w-400px  sm:max-w-[600px] md:min-w-[700px] lg:min-w-[1000px]  ">
-                {/* {window.innerWidth < 640 ? ( */}
-                  <Swiper
-                    slidesPerView={1}
-                    spaceBetween={30}
-                    keyboard={{
-                      enabled: true,
-                    }}
-                    pagination={{
-                      clickable: true,
-                    }}
-                    navigation={true}
-                    modules={[Keyboard, Pagination, Navigation]}
-                    className="mySwiper p-7 mt-4 !h-[250px] rounded-md md:mb-0 mb-10   md:!h-[500px]"
-                  >
-                    {product.pictures?.map((p, i) => (
-                      <SwiperSlide key={i}>
-                        <img src={p} alt="" />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                {/* ) : (
-                  <Carousel
-                    //  className="!min-h-full"
-                    // style={{
-                    //   minHeight: "100% !important",
-                    // }}
-                    itemsToShow={1}
-                    breakPoints={[
-                      { width: 1, itemsToShow: 1 },
-                      {
-                        width: 550,
-                      },
-                    ]}
-                  >
-                    {product?.pictures?.map((p, i) => (
-                      <img src={p} alt="" key={i} />
-                    ))}
-                  </Carousel>
-                )} */}
-              </div>
-            )}
+            <div className="min-w-400px  sm:max-w-[600px] md:min-w-[700px] lg:min-w-[1000px]  ">
+              <Swiper
+                slidesPerView={1}
+                spaceBetween={30}
+                keyboard={{
+                  enabled: true,
+                }}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={true}
+                modules={[Keyboard,Lazy, Pagination, Navigation]}
+                className="mySwiper p-7 mt-4 !h-[250px] rounded-md md:mb-0 mb-10   md:!h-[500px]"
+              >
+                {product.pictures?.length > 0 ? (
+                  product.pictures?.map((p, i) => (
+                    <SwiperSlide key={i}>
+                      <img src={p || placeholder} alt="" />
+                    </SwiperSlide>
+                  ))
+                ) : (
+                  <SwiperSlide>
+                    <img src={placeholder} alt="" />
+                  </SwiperSlide>
+                )}
+              </Swiper>
+            </div>
             <div className="bg-white h-full w-full flex-1 md:ml-14 ml-0 flex flex-col">
               <div className="w-ful flex flex-col ">
                 <div className="flex justify-between">

@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import StarsRating from "stars-rating";
 import { addtoCart, updateCartProduct } from "../../Redux/Cart/action-creators";
 import Spinner from "../../UI/Spinner";
 import { fetchProducts } from "../../Redux/Products/action-creator";
+import { Rating } from "@mui/material";
+import placeholder from "../Assets/image-placeholder-base.webp";
 
 const ProductComp = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,15 @@ const ProductComp = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  const calcAverageReview = (p) => {
+    const totalLength = p?.reviews?.length;
+    let total = 0;
+    for (let i of p.reviews) {
+      total += i.rating;
+    }
+    return total / totalLength;
+  };
+
   return (
     <>
       {products.length < 1 ? (
@@ -57,12 +67,11 @@ const ProductComp = () => {
                 key={i}
               >
                 <img
-                  src={p.pictures[0]}
+                  src={p.pictures[0] || placeholder}
                   alt=""
-                  className="w-full max-h-[150px] object-contain"
+                  className="w-full h-[200px] object-contain"
                 />
-                <div className="w-full h-full flex   items-center p-1">
-                  <div className=" w-full flex flex-col items-center justify-center">
+                  <div className=" w-full flex flex-col items-center justify-center mt-auto">
                     <span className="text-black text-xl font-bold ">
                       {p.name}
                     </span>
@@ -71,17 +80,13 @@ const ProductComp = () => {
                     <span className=" text-black font-semibold text-2xl mt-3">
                       ${p.price}
                     </span>
-                    <StarsRating
-                      className=" w-[140px] flex justify-between "
-                      count={5}
-                      size={42}
-                      color2={"#ffd700"}
-                      edit={false}
-                      // value={p.reviews[0]?.rating}
-                      value={4.3}
+                    <Rating
+                      name="read-only"
+                      value={p?.reviews && calcAverageReview(p)}
+                      readOnly
+                      size=""
                     />
                   </div>
-                </div>
                 <button
                   className="mt-auto px-3 py-3  bg-zinc-500 rounded-b-lg text-white font-semibold hover:bg-zinc-600 ease-in duration-100  "
                   onClick={handleAddtoCart.bind(null, p._id)}
