@@ -35,11 +35,19 @@ const Header = () => {
           </Link>
         </li>
         {userType === "Admin" && (
-          <li>
-            <Link to={"/products/addproduct"} className="">
-              Add Product
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link to={"/products/addproduct"} className="">
+                Add Product
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/allWallet"} className="">
+                Users Wallet
+              </Link>
+            </li>
+          </>
         )}
         <li>
           <Link to={"/faq"} className="">

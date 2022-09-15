@@ -12,6 +12,9 @@ import Products from "./Pages/Products";
 import ProductDetail from "./Pages/ProductDetail";
 import AddProduct from "./Pages/AddProduct";
 import EditProduct from "./Components/Product/EditProduct";
+import Checkout from "./Pages/Checkout";
+import Order from "./Pages/Order";
+import AllWallets from "./Pages/AllWallets";
 
 const App = () => {
   return (
@@ -42,6 +45,9 @@ const App = () => {
         <Route path="/products/:productId" element={<ProductDetail />} />
         <Route path="/products/:productId/edit" element={<EditProduct />} />
         <Route path="/products/addProduct" element={<AddProduct />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/allWallet" element={<AllWallets />} />
       </Routes>
 
       {/* <Footer /> */}

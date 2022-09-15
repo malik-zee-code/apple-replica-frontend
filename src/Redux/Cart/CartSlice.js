@@ -34,6 +34,10 @@ const CartSlice = createSlice({
     deleteCartProduct: (state, action) => {
       return { ...action.payload, cartToggle: state.cartToggle };
     },
+
+    deleteAllcartProduct: (state , action) => {
+      return action.payload
+    }
   },
 });
 

@@ -194,3 +194,39 @@ export const deleteCartProduct = (product_id, token) => {
     });
   };
 };
+
+export const DeleteCartProducts = (token) => {
+  return async (dispatch) => {
+    const config = {
+      headers: {
+        "x-auth-token": token,
+      },
+    };
+
+    const getCartItems = axios.patch(
+      `${process.env.REACT_APP_API}/cartItem/cart`,{},
+      config
+    );
+
+    getCartItems
+      .then((d) => {
+        dispatch(
+          CartActions.deleteAllcartProduct({
+            cartItems: d.data.data,
+            isLoading: false,
+            error: false,
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(
+          CartActions.deleteAllcartProduct({
+            cartItems: [],
+            isLoading: false,
+            error: true,
+          })
+        );
+      });
+  };
+};

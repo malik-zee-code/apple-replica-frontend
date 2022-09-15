@@ -80,9 +80,24 @@ const HandBagBox = (props) => {
       </div>
       <nav className="w-full mt-auto flex">
         <ul className="w-full h-full mt-auto">
+          {cartItems.length > 0 && (
+            <li
+              className="py-3 border-y-[2px] text-sm hover:underline hover:text-indigo-700 text-indigo-700  flex items-center"
+              onClick={() => {
+                navigate("/checkout");
+                dispatch(CartActions.toggleCart());
+              }}
+            >
+              <FontAwesomeIcon icon={faBoxOpen} className="h-4 mr-3" />
+              Checkout
+            </li>
+          )}
           <li
             className="py-3 border-y-[2px] text-sm hover:underline hover:text-indigo-700 text-indigo-700  flex items-center"
-            onClick={() => dispatch(CartActions.toggleCart())}
+            onClick={() => {
+              navigate("/order");
+              dispatch(CartActions.toggleCart());
+            }}
           >
             <FontAwesomeIcon icon={faBoxOpen} className="h-4 mr-3" />
             Orders
