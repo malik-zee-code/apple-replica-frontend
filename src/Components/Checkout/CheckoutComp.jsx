@@ -15,6 +15,7 @@ import {
 
 const CheckoutComp = () => {
   const [wallet, setWallet] = useState();
+  const userId = useSelector((state) => state.User.userData._id);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
@@ -55,7 +56,7 @@ const CheckoutComp = () => {
       .then((d) => {
         console.log(d.data.data);
         axios.patch(
-          `${process.env.REACT_APP_API}/user/updateWallet`,
+          `${process.env.REACT_APP_API}/user/updateWallet/${userId}`,
           {
             wallet: wallet - calcTotalAmount(),
           },
@@ -73,7 +74,7 @@ const CheckoutComp = () => {
         "x-auth-token": token,
       },
     };
-  
+
     axios
       .get(`${process.env.REACT_APP_API}/user/getWallet`, config)
       .then((d) => {
@@ -81,7 +82,7 @@ const CheckoutComp = () => {
         setWallet(d.data.data.balance);
       })
       .catch((e) => console.log(e));
-  },[token]);
+  }, [token]);
 
   useEffect(() => {
     dispatch(fetchCartProducts(token));
@@ -146,6 +147,11 @@ const CheckoutComp = () => {
       </div>
 
       <div className="ml-auto">
+        <span className="text-2xl font-semibold text-black mr-8">
+          Wallet Balance:{" "}
+          <span className="text-slate-700 ml-5">${wallet}</span>
+        </span>
+
         <span className="text-2xl font-semibold text-black">
           Total Amount:{" "}
           <span className="text-slate-700 ml-5">${calcTotalAmount()}</span>
@@ -153,7 +159,9 @@ const CheckoutComp = () => {
       </div>
 
       {wallet < calcTotalAmount() ? (
-        <span>You Don't have Enough Money to purchase it</span>
+        <span className="text-center w-full flex justify-end mt-5 text-medium ">
+          You Don't have Enough Wallet balance to purchase it
+        </span>
       ) : (
         <label
           htmlFor="my-modal"
@@ -167,7 +175,7 @@ const CheckoutComp = () => {
       <div className="modal">
         <div className="modal-box bg-white">
           <h3 className="font-bold text-lg">Checkout</h3>
-          <p className="py-4">You have {wallet}</p>
+          <p className="py-4">You have ${wallet} Wallet Balance</p>
           <div className="modal-action">
             <label htmlFor="my-modal" className="btn" onClick={orderHandler}>
               Order Now

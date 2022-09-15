@@ -31,17 +31,20 @@ const OrderComp = () => {
               </thead>
               <tbody>
                 {Orders?.map((o, i) => (
-                  <tr>
+                  <tr key={i}>
                     <td>{i + 1}</td>
                     <td align="center">{o.product.name}</td>
                     <td>{o.quantity}</td>
-                    <td>{o.product.price}</td>
+                    <td>${o.product.price}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <span className="w-full flex justify-center"> You Have no Pending Orders</span>
+            <span className="w-full flex justify-center">
+              {" "}
+              You Have no Pending Orders
+            </span>
           )}
         </div>
       </div>{" "}
