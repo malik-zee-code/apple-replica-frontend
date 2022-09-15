@@ -142,14 +142,24 @@ const Header = () => {
             </Link>
 
             {userType === "Admin" && (
-              <Link
-                to={"/products/addproduct"}
-                // className=""
-                className="w-full border-b-[1px] py-3 border-[#363636]"
-                onClick={() => setToggle(false)}
-              >
-                Add Product
-              </Link>
+              <>
+                <Link
+                  to={"/products/addproduct"}
+                  // className=""
+                  className="w-full border-b-[1px] py-3 border-[#363636]"
+                  onClick={() => setToggle(false)}
+                >
+                  Add Product
+                </Link>
+                <Link
+                  to={"/allWallet"}
+                  // className=""
+                  className="w-full border-b-[1px] py-3 border-[#363636]"
+                  onClick={() => setToggle(false)}
+                >
+                  Users Wallet
+                </Link>
+              </>
             )}
 
             <Link
