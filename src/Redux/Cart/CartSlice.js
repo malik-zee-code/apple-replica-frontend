@@ -35,9 +35,9 @@ const CartSlice = createSlice({
       return { ...action.payload, cartToggle: state.cartToggle };
     },
 
-    deleteAllcartProduct: (state , action) => {
-      return action.payload
-    }
+    deleteAllcartProduct: (state, action) => {
+      return action.payload;
+    },
   },
 });
 

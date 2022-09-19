@@ -1,3 +1,4 @@
+import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
@@ -5,9 +6,11 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Search } from "@mui/icons-material";
 
 const AllWalletsComp = () => {
   const [user, setUsers] = useState();
+  const [dmyuser, setDumyUsers] = useState();
   const [wallet, setWallet] = useState();
 
   const userType = useSelector((state) => state.User.userData.userType);
@@ -26,6 +29,7 @@ const AllWalletsComp = () => {
       .then((d) => {
         console.log(d.data.data);
         setUsers(d.data.data);
+        setDumyUsers(d.data.data);
       })
       .catch((e) => console.log(e));
   }, []);
@@ -50,6 +54,13 @@ const AllWalletsComp = () => {
       .catch((e) => console.log(e));
   };
 
+  const searchHandler = (e) => {
+    console.log(e.target.value);
+    const users = user.filter((s) => s.username?.includes(e.target.value));
+    console.log(users);
+    setDumyUsers(users);
+  };
+
   useEffect(() => {
     if (userType && userType !== "Admin") {
       navigate(-1);
@@ -62,12 +73,29 @@ const AllWalletsComp = () => {
   return (
     <div className="w-full flex justify-center">
       <div className="w-[80%] flex flex-col mt-20">
-        <span className="text-3xl font-bold my-5">All User Wallets</span>
+        <div className="flex justify-between items-center">
+          <span className="text-3xl font-bold my-5">All User Wallets</span>
+
+          <FormControl variant="standard">
+            <InputLabel htmlFor="input-with-icon-adornment">
+              Search By Name
+            </InputLabel>
+            <Input
+              id="input-with-icon-adornment"
+              endAdornment={
+                <InputAdornment position="end">
+                  <Search />
+                </InputAdornment>
+              }
+              onChange={searchHandler}
+            />
+          </FormControl>
+        </div>
         <div className="w-full ">
           <div className="overflow-x-auto">
             <table className="table  w-full">
               <thead className="">
-                <tr>
+                <tr className="!flex">
                   <th></th>
                   <th className="text-white">Name</th>
                   <th className="text-white w-[400px]">Wallet</th>
@@ -75,7 +103,7 @@ const AllWalletsComp = () => {
                 </tr>
               </thead>
               <tbody>
-                {user?.map((s, i) => (
+                {dmyuser?.map((s, i) => (
                   <tr key={i}>
                     <th className="text-white">{i + 1}</th>
                     <td className="text-white">{s.username}</td>
