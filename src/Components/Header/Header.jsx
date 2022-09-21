@@ -4,7 +4,7 @@ import {
   faShoppingBag,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Close, Menu, Search } from "@mui/icons-material";
+import { Close, Menu } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
