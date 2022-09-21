@@ -121,14 +121,6 @@ const Header = () => {
           toggle ? "-translate-y-0 mt-10" : "-translate-y-full mt-0"
         }  ease-out duration-500 h-screen absolute  left-0 bg-black z-20`}
       >
-        <div className="bg-[#1f1f1f] p-2 rounded-md flex m-4">
-          <Search className="" />
-          <input
-            type="text"
-            className=" bg-[#1f1f1f] w-full h-[full] outline-none ml-3 "
-            placeholder="Search apple.com"
-          />
-        </div>
         <hr className="my-5 border-[#363636]" />
         <div className="mx-10">
           <div className=" w-full flex flex-col text-[#d6d6d6]  text-lg   ">

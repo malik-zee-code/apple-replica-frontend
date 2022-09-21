@@ -4,6 +4,7 @@ const initialState = {
   products: [],
   isLoading: false,
   error: false,
+  filteredProducts: [],
 };
 
 const ProductSlice = createSlice({
@@ -12,6 +13,9 @@ const ProductSlice = createSlice({
   reducers: {
     getProducts: (state, action) => {
       return action.payload;
+    },
+    filterProducts: (state, action) => {
+      return { ...state, filteredProducts: action.payload };
     },
   },
 });

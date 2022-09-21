@@ -18,6 +18,7 @@ export const fetchProducts = () => {
         dispatch(
           ProductActions.getProducts({
             products: d.data.data,
+            filteredProducts: d.data.data,
             isLoading: false,
             error: false,
           })
@@ -42,4 +43,10 @@ export const fetchProducts = () => {
         });
       });
   };
+};
+
+export const filteredProducts = (products, value) => async (dispatch) => {
+  const dummyProducts = products.filter((p) => p.name.includes(value));
+
+  dispatch(ProductActions.filterProducts(dummyProducts));
 };

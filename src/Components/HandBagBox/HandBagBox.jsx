@@ -20,6 +20,8 @@ import HandBox from "./HandBox";
 
 const HandBagBox = (props) => {
   const cartItems = useSelector((state) => state.Cart.cartItems);
+
+  const wallet = useSelector((state) => state.User.userData?.wallet?.balance);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,6 +43,11 @@ const HandBagBox = (props) => {
       className="z-50 tablet:w-[300px] w-full h-[300px] border-2 shadow-lg tablet:fixed absolute  tablet:top-[50px] top-10 tablet:right-[550px]  flex  flex-col bg-white p-2 tablet:rounded-[12px]"
       onClickOutside={() => dispatch(CartActions.toggleCart())}
     >
+      {token && (
+        <span className="text-right text-black font-medium">
+          Wallet : ${wallet || 0}
+        </span>
+      )}
       <div className="w-full min-h-[100px] max-h-full p-4 overflow-y-auto">
         {cartItems.length > 0 ? (
           cartItems.map((cart, i) => (

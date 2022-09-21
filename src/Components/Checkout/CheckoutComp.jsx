@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   deleteCartProduct,
   DeleteCartProducts,
@@ -14,7 +15,7 @@ import {
 } from "../../Redux/Cart/action-creators";
 
 const CheckoutComp = () => {
-  const [wallet, setWallet] = useState();
+  const [wallet, setWallet] = useState(0);
   const userId = useSelector((state) => state.User.userData._id);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
@@ -43,8 +44,9 @@ const CheckoutComp = () => {
 
     for (let c of CartItems) {
       let d = {
-        product: c.product,
+        product: c.product._id,
         quantity: c.quantity,
+        user: userId,
       };
 
       data.orders.push(d);
@@ -64,6 +66,16 @@ const CheckoutComp = () => {
         );
 
         dispatch(DeleteCartProducts(token));
+
+        toast("🦄 Thank You for placing the Order!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -142,14 +154,16 @@ const CheckoutComp = () => {
             </tbody>
           </table>
         ) : (
-          <span className="text-3xl text-black">Your Cart is Empty</span>
+          <span className="text-3xl text-black text-center">
+            Your Cart is Empty
+          </span>
         )}
       </div>
 
       <div className="ml-auto">
         <span className="text-2xl font-semibold text-black mr-8">
           Wallet Balance:{" "}
-          <span className="text-slate-700 ml-5">${wallet}</span>
+          <span className="text-slate-700 ml-5">${wallet || 0}</span>
         </span>
 
         <span className="text-2xl font-semibold text-black">
@@ -175,9 +189,14 @@ const CheckoutComp = () => {
       <div className="modal">
         <div className="modal-box bg-white">
           <h3 className="font-bold text-lg">Checkout</h3>
-          <p className="py-4">You have ${wallet} Wallet Balance</p>
+          {console.log(wallet)}
+          <p className="py-4">You have ${wallet || 0} Wallet Balance</p>
           <div className="modal-action">
-            <label htmlFor="my-modal" className="btn" onClick={orderHandler}>
+            <label htmlFor="my-modal" className="btn">
+              Cancel
+            </label>
+
+            <label className="btn" onClick={orderHandler}>
               Order Now
             </label>
           </div>

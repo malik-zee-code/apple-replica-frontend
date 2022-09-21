@@ -92,27 +92,33 @@ const AllWalletsComp = () => {
           </FormControl>
         </div>
         <div className="w-full ">
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto mb-10 border-2 border-slate-800 rounded-xl">
             <table className="table  w-full">
               <thead className="">
-                <tr className="!flex">
-                  <th></th>
-                  <th className="text-white">Name</th>
-                  <th className="text-white w-[400px]">Wallet</th>
-                  <th></th>
+                <tr className="">
+                  <th className="w-[200px]"></th>
+                  <th className="text-white w-[200px]">Name</th>
+                  <th className="text-white w-[200px]">Wallet</th>
+                  <th className="text-white w-[400px]" align="center">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {dmyuser?.map((s, i) => (
                   <tr key={i}>
                     <th className="text-white">{i + 1}</th>
-                    <td className="text-white">{s.username}</td>
-                    <td className="text-white">$ {s.wallet?.balance || 0}</td>
-                    <td align="right">
+                    <td className="text-white capitalize text-sm sm:text-[16px]">
+                      {s.username}
+                    </td>
+                    <td className="text-white text-sm sm:text-[16px]">
+                      $ {s.wallet?.balance || 0}
+                    </td>
+                    <td align="center">
                       {" "}
                       <label
                         htmlFor={`my-modal-${i}`}
-                        className="btn text-white !bg-primary border-none hover ml-auto "
+                        className="sm:btn sm:text-white text-white  px-2 py-2 rounded-md text-[10px] !bg-primary border-none hover ml-auto "
                       >
                         Update Wallet
                       </label>
