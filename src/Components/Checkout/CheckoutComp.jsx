@@ -105,7 +105,7 @@ const CheckoutComp = () => {
     <div className="mt-20 w-[80%] flex flex-col ">
       <div className="overflow-x-auto w-full min-h-[450px] flex justify-center items-center ">
         {CartItems.length > 0 ? (
-          <table className=" w-full border-separate border-spacing-3">
+          <table className=" w-full border-separate border-spacing-3 ">
             <thead>
               <tr>
                 <th>Image</th>
@@ -160,15 +160,19 @@ const CheckoutComp = () => {
         )}
       </div>
 
-      <div className="ml-auto">
-        <span className="text-2xl font-semibold text-black mr-8">
+      <div className="ml-auto text-base sm:text-lg md:text-xl flex flex-col md:flex-row  ">
+        <span className=" font-semibold text-black mr-8">
           Wallet Balance:{" "}
-          <span className="text-slate-700 ml-5">${wallet || 0}</span>
+          <span className="text-slate-700 ml-5 font-extralight tracking-wider">
+            ${wallet || 0}
+          </span>
         </span>
 
-        <span className="text-2xl font-semibold text-black">
+        <span className=" font-semibold text-black">
           Total Amount:{" "}
-          <span className="text-slate-700 ml-5">${calcTotalAmount()}</span>
+          <span className="text-slate-700 ml-5 font-extralight tracking-wider">
+            ${calcTotalAmount()}
+          </span>
         </span>
       </div>
 

@@ -15,6 +15,7 @@ import EditProduct from "./Components/Product/EditProduct";
 import Checkout from "./Pages/Checkout";
 import Order from "./Pages/Order";
 import AllWallets from "./Pages/AllWallets";
+import Wallet from "./Pages/Wallet";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order" element={<Order />} />
         <Route path="/allWallet" element={<AllWallets />} />
+        <Route path="/wallet" element={<Wallet />} />
       </Routes>
 
       {/* <Footer /> */}
