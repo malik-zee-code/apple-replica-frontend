@@ -3,12 +3,9 @@ import { useCallback } from "react";
 
 const ChangePercentComp = () => {
   const getAllGeneratedLinks = useCallback(() => {}, []);
-  useEffect(
-    () => {
-      getAllGeneratedLinks();
-    },
-    { getAllGeneratedLinks }
-  );
+  useEffect(() => {
+    getAllGeneratedLinks();
+  });
   return (
     <div className="w-full flex justify-center">
       <div className="w-[80%] flex flex-col mt-20">
