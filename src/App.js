@@ -16,6 +16,9 @@ import Checkout from "./Pages/Checkout";
 import Order from "./Pages/Order";
 import AllWallets from "./Pages/AllWallets";
 import Wallet from "./Pages/Wallet";
+import Invite from "./Pages/Invite";
+import InviteRegisterComp from "./Components/Invite/RegisterComp";
+import ChangePercentage from "./Pages/ChangePercentage";
 
 const App = () => {
   return (
@@ -50,6 +53,13 @@ const App = () => {
         <Route path="/order" element={<Order />} />
         <Route path="/allWallet" element={<AllWallets />} />
         <Route path="/wallet" element={<Wallet />} />
+        <Route path="/invite" element={<Invite />} />
+        <Route path="/changePercent" element={<ChangePercentage />} />
+
+        <Route
+          path="/invite/:username/:userId"
+          element={<InviteRegisterComp />}
+        />
       </Routes>
 
       {/* <Footer /> */}

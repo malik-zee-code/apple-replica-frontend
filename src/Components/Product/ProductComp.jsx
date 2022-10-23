@@ -18,6 +18,7 @@ const ProductComp = () => {
   const filterProducts = useSelector((state) => state.Product.filteredProducts);
   const token = useSelector((state) => state.User.token);
   const cartItems = useSelector((state) => state.Cart.cartItems);
+  const refferedBy = useSelector((state) => state.User.userData.refferedBy);
   const navigate = useNavigate();
 
   const handleAddtoCart = (productId, e) => {
@@ -99,7 +100,20 @@ const ProductComp = () => {
                   <span className="">{p.description.slice(0, 28)}...</span>
 
                   <span className=" text-black font-semibold text-2xl mt-3">
-                    ${p.price}
+                    <span
+                      className={`${refferedBy?.percentage && "line-through"}`}
+                    >
+                      ${p.price}
+                    </span>
+
+                    {refferedBy?.percentage && (
+                      <span className="ml-2">
+                        $
+                        {Math.abs(
+                          p.price - (refferedBy.percentage / 100) * p.price
+                        )}
+                      </span>
+                    )}
                   </span>
                   <Rating
                     name="read-only"

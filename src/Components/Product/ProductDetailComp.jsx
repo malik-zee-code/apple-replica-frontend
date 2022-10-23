@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Lazy,Pagination, Navigation } from "swiper";
+import { Keyboard, Lazy, Pagination, Navigation } from "swiper";
 import { addtoCart, updateCartProduct } from "../../Redux/Cart/action-creators";
 import Spinner from "../../UI/Spinner";
 import ReviewComp from "./ReviewComp";
@@ -18,6 +18,7 @@ const ProductDetailComp = () => {
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const refferedBy = useSelector((state) => state.User.userData.refferedBy);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ const ProductDetailComp = () => {
                   clickable: true,
                 }}
                 navigation={true}
-                modules={[Keyboard,Lazy, Pagination, Navigation]}
+                modules={[Keyboard, Lazy, Pagination, Navigation]}
                 className="mySwiper p-7 mt-4 !h-[250px] rounded-md md:mb-0 mb-10   md:!h-[500px]"
               >
                 {product.pictures?.length > 0 ? (
@@ -164,10 +165,25 @@ const ProductDetailComp = () => {
                   )}
                 </div>
                 <hr className="w-[3em] border-2 border-slate-800 rounded-full" />
-                <div className=""></div>
-                <span className="text-2xl font-medium mt-6">
-                  ${product.price}
-                </span>
+                <div className="mt-6">
+                  <span
+                    className={`${
+                      refferedBy?.percentage && "line-through"
+                    } text-2xl font-medium `}
+                  >
+                    ${product.price}
+                  </span>
+
+                  {refferedBy?.percentage && (
+                    <span className="ml-2 text-2xl font-medium">
+                      $
+                      {Math.abs(
+                        (refferedBy.percentage / 100) * product.price -
+                          product.price
+                      )}
+                    </span>
+                  )}
+                </div>
                 <span className="mt-5 flex items-center">
                   <Rating
                     name="read-only"

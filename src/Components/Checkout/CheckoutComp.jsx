@@ -17,6 +17,7 @@ import {
 const CheckoutComp = () => {
   const [wallet, setWallet] = useState(0);
   const userId = useSelector((state) => state.User.userData._id);
+  const refferedBy = useSelector((state) => state.User.userData.refferedBy);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
@@ -24,8 +25,18 @@ const CheckoutComp = () => {
 
   const calcTotalAmount = () => {
     let total = 0;
-    for (let c of CartItems) {
-      total += c.product.price * c.quantity;
+
+    if (refferedBy?.percentage) {
+      for (let c of CartItems) {
+        total +=
+          Math.abs(
+            (refferedBy.percentage / 100) * c.product.price - c.product.price
+          ) * c.quantity;
+      }
+    } else {
+      for (let c of CartItems) {
+        total += c.product.price * c.quantity;
+      }
     }
 
     return total;
@@ -43,13 +54,25 @@ const CheckoutComp = () => {
     };
 
     for (let c of CartItems) {
-      let d = {
-        product: c.product._id,
-        quantity: c.quantity,
-        user: userId,
-      };
-
-      data.orders.push(d);
+      if (refferedBy?.percentage) {
+        let d = {
+          product: c.product._id,
+          price: Math.abs(
+            c.product.price - (refferedBy.percentage / 100) * c.product.price
+          ),
+          quantity: c.quantity,
+          user: userId,
+        };
+        data.orders.push(d);
+      } else {
+        let d = {
+          product: c.product._id,
+          price: c.product.price,
+          quantity: c.quantity,
+          user: userId,
+        };
+        data.orders.push(d);
+      }
     }
 
     console.log(data.orders);

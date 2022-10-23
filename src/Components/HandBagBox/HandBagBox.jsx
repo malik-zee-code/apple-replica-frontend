@@ -20,7 +20,7 @@ import HandBox from "./HandBox";
 
 const HandBagBox = (props) => {
   const cartItems = useSelector((state) => state.Cart.cartItems);
-
+  const refferedBy = useSelector((state) => state.User.userData.refferedBy);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -56,9 +56,19 @@ const HandBagBox = (props) => {
                   <span className="text-black font-medium">
                     {cart.product.name}
                   </span>
-                  <span className="text-slate-600">
-                    {cart.quantity} x ${cart.product.price}
-                  </span>
+                  {refferedBy?.percentage ? (
+                    <span className="text-slate-600">
+                      {cart.quantity} x $
+                      {Math.abs(
+                        (refferedBy.percentage / 100) * cart.product.price -
+                          cart.product.price
+                      )}
+                    </span>
+                  ) : (
+                    <span className="text-slate-600">
+                      {cart.quantity} x ${cart.product.price}
+                    </span>
+                  )}
                 </div>
                 <IconButton
                   onClick={handleDeleteCartProduct.bind(null, cart.product._id)}

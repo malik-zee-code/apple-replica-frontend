@@ -17,13 +17,14 @@ const Header = () => {
   // const [cartToggle, setCartToggle] = useState(false);
   const cartToggle = useSelector((state) => state.Cart.cartToggle);
   const userType = useSelector((state) => state.User.userData.userType);
+  const isLoggedIn = useSelector((state) => state.User.isLoggedin);
   const dispatch = useDispatch();
 
   return (
     <div
       className={` h-[40px] w-full  bg-[#333333] flex flex-col items-center `}
     >
-      <ul className="w-[30%]  h-full tablet:flex hidden items-center text-[#d6d6d6]  text-[11px] justify-around">
+      <ul className="w-[50%]  h-full tablet:flex hidden items-center text-[#d6d6d6]  text-[11px] justify-around">
         <li>
           <Link to={"/"} className="mr-3">
             <FontAwesomeIcon icon={faApple} className="w-[20px] h-[20px]" />
@@ -59,6 +60,14 @@ const Header = () => {
             Messanger
           </Link>
         </li>
+
+        {isLoggedIn && (
+          <li>
+            <Link to={"/invite"} className="">
+              Invite
+            </Link>
+          </li>
+        )}
 
         <li>
           <Link to={"/"} className="">

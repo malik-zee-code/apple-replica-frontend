@@ -103,7 +103,7 @@ const OrderComp = () => {
                         {s.quantity}
                       </td>
                       <td className="text-white capitalize text-sm sm:text-[16px]">
-                        ${s.product.price}
+                        ${s?.price}
                       </td>
 
                       <td>
