@@ -14,7 +14,6 @@ import HandBagBox from "../HandBagBox/HandBagBox";
 
 const Header = () => {
   const [toggle, setToggle] = useState();
-  // const [cartToggle, setCartToggle] = useState(false);
   const cartToggle = useSelector((state) => state.Cart.cartToggle);
   const userType = useSelector((state) => state.User.userData.userType);
   const isLoggedIn = useSelector((state) => state.User.isLoggedin);
@@ -46,6 +45,18 @@ const Header = () => {
             <li>
               <Link to={"/allWallet"} className="">
                 Users Wallet
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/changePercent"} className="">
+                Change Percentage
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/changeLinkStatus"} className="">
+                Change Link Status
               </Link>
             </li>
           </>

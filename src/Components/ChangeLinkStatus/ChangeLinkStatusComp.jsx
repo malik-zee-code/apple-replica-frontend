@@ -5,29 +5,23 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const ChangePercentComp = () => {
-  const [users, setUsers] = useState([]);
-  const [percentage, setPercentage] = useState(0);
+const ChangeLinkStatusComp = () => {
+  const [links, setLinks] = useState([]);
+  const [status, setStatus] = useState("");
   const navigate = useNavigate();
 
-  const getAllPercentages = useCallback(() => {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: {
-        "x-auth-token": token,
-      },
-    };
+  const getAllLinks = useCallback(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/user/getAllPercentages`, config)
+      .get(`${process.env.REACT_APP_API}/user/links`)
       .then((d) => {
-        setUsers(d.data.data);
+        setLinks(d.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const percentageHandler = (userId) => {
+  const linkHandler = (linkId) => {
     const token = localStorage.getItem("token");
     const config = {
       headers: {
@@ -36,11 +30,11 @@ const ChangePercentComp = () => {
     };
 
     const data = {
-      percentage: percentage,
+      status: status,
     };
     axios
       .post(
-        `${process.env.REACT_APP_API}/user/changePercentage/${userId}`,
+        `${process.env.REACT_APP_API}/user/changeStatus/${linkId}`,
         data,
         config
       )
@@ -71,13 +65,13 @@ const ChangePercentComp = () => {
   };
 
   useEffect(() => {
-    getAllPercentages();
-  }, [getAllPercentages]);
+    getAllLinks();
+  }, [getAllLinks]);
   return (
     <div className="w-full flex justify-center">
       <div className="w-[80%] flex flex-col mt-20">
         <div className="flex justify-between items-center">
-          <span className="text-3xl font-bold my-5">All Users Percentages</span>
+          <span className="text-3xl font-bold my-5">All Generated Links</span>
         </div>
         <div className="w-full ">
           <div className="overflow-x-auto mb-10 border-2 border-slate-800 rounded-xl">
@@ -86,29 +80,36 @@ const ChangePercentComp = () => {
                 <tr className="">
                   <th className="w-[200px]"></th>
                   <th className="text-white w-[200px]">Name</th>
-                  <th className="text-white w-[200px]">Percentage</th>
+                  <th className="text-white w-[200px]">Status</th>
                   <th className="text-white w-[400px]" align="center">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {users?.map((s, i) => (
+                {links?.map((s, i) => (
                   <tr key={i}>
                     <th className="text-white">{i + 1}</th>
                     <td className="text-white capitalize text-sm sm:text-[16px]">
-                      {s.username}
+                      {s?.generatedBy?.username}
                     </td>
-                    <td className="text-white text-sm sm:text-[16px]">
-                      $ {s.percentage || 0}
+                    <td className="text-white text-sm sm:text-[16px] capitalize">
+                      {s.status === "live" ? (
+                        <span className="btn btn-success btn-active no-animation text-white">
+                          {s.status}
+                        </span>
+                      ) : (
+                        <span className="btn btn-error btn-active no-animation text-white">
+                          {s.status}
+                        </span>
+                      )}
                     </td>
                     <td align="center">
-                      {" "}
                       <label
                         htmlFor={`my-modal-${i}`}
                         className="sm:btn sm:text-white text-white  px-2 py-2 rounded-md text-[10px] !bg-primary border-none hover ml-auto "
                       >
-                        Change Percentage
+                        Change Status
                       </label>
                       <input
                         type="checkbox"
@@ -119,23 +120,26 @@ const ChangePercentComp = () => {
                         <div className="modal-box bg-white ">
                           <div className="mr-auto w-full flex flex-col">
                             <span className="py-4 text-lg mt-4 text-black mr-auto">
-                              Current Percentage
+                              Current Status
                             </span>
 
-                            <input
-                              onChange={(e) => setPercentage(e.target.value)}
-                              type="number"
-                              placeholder="Percentage"
-                              className="input bg-white input-bordered w-full max-w-xs"
-                            />
+                            <select
+                              className="select w-full max-w-xs bg-white"
+                              onChange={(e) => setStatus(e.target.value)}
+                              defaultValue={s?.status}
+                            >
+                              <option disabled selected>
+                                Change Status
+                              </option>
+                              <option value={"pending"}>Pending</option>
+                              <option value={"live"}>Live</option>
+                            </select>
                           </div>
                           <div className="modal-action">
                             <button
-                              disabled={
-                                percentage === undefined || percentage === 0
-                              }
+                              disabled={status === undefined || status === ""}
                               className="btn"
-                              onClick={percentageHandler.bind(null, s._id)}
+                              onClick={linkHandler.bind(null, s._id)}
                             >
                               Update
                             </button>
@@ -161,4 +165,4 @@ const ChangePercentComp = () => {
   );
 };
 
-export default ChangePercentComp;
+export default ChangeLinkStatusComp;

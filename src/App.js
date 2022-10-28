@@ -19,6 +19,7 @@ import Wallet from "./Pages/Wallet";
 import Invite from "./Pages/Invite";
 import InviteRegisterComp from "./Components/Invite/RegisterComp";
 import ChangePercentage from "./Pages/ChangePercentage";
+import ChangeLinkStatus from "./Pages/ChangeLinkStatus";
 
 const App = () => {
   return (
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/invite" element={<Invite />} />
         <Route path="/changePercent" element={<ChangePercentage />} />
+        <Route path="/changeLinkStatus" element={<ChangeLinkStatus />} />
 
         <Route
           path="/invite/:username/:userId"

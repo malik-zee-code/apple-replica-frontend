@@ -50,20 +50,19 @@ const InviteComp = () => {
           type="text"
           readonly
           value={
-            link &&
-            `${window.location.protocol}//${window.location.hostname}:${
-              window.location.port ? window.location.port : ""
-            }/invite/${link?.url}`
+            link.status !== "pending"
+              ? `${window.location.protocol}//${window.location.hostname}:${
+                  window.location.port ? window.location.port : ""
+                }/invite/${link?.url}`
+              : "Your Link is on Pending."
           }
           onClick={() => {
-            link &&
+            link.status !== "pending" &&
               navigator.clipboard.writeText(
                 `${window.location.protocol}//${window.location.hostname}:${
                   window.location.port ? window.location.port : ""
                 }/invite/${link?.url}`
               );
-            console.log("copied");
-
             toast.info(`Link copied to Clipboard!`, {
               position: "top-right",
               autoClose: 5000,
@@ -73,6 +72,7 @@ const InviteComp = () => {
               draggable: true,
               progress: undefined,
             });
+            console.log("copied");
           }}
           className="input font-semibold  mt-10 w-full max-w-xs !bg-white cursor-pointer "
         />

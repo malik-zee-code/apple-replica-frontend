@@ -57,6 +57,8 @@ const InviteRegisterComp = () => {
     }
   }, [token, navigate]);
 
+  useEffect(() => {}, []);
+
   return (
     <div className="w-full min-h-full flex justify-center ">
       {" "}
