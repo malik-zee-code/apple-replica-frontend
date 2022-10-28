@@ -45,7 +45,7 @@ const InviteComp = () => {
   }, [getLink]);
   return (
     <div className=" w-full min-h-full  flex justify-center mt-24 ">
-      <div className="w-[600px] min-h-[300px] bg-slate-700 rounded-md p-10 text-center">
+      <div className="w-[600px] min-h-[300px] bg-slate-700 rounded-md p-10 text-center mx-5">
         <input
           type="text"
           readonly

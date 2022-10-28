@@ -146,7 +146,6 @@ const Header = () => {
           <div className=" w-full flex flex-col text-[#d6d6d6]  text-lg   ">
             <Link
               to={"/products"}
-              // className=""
               className="w-full border-b-[1px] py-3 border-[#363636]"
               onClick={() => setToggle(false)}
             >
@@ -157,7 +156,6 @@ const Header = () => {
               <>
                 <Link
                   to={"/products/addproduct"}
-                  // className=""
                   className="w-full border-b-[1px] py-3 border-[#363636]"
                   onClick={() => setToggle(false)}
                 >
@@ -165,13 +163,38 @@ const Header = () => {
                 </Link>
                 <Link
                   to={"/allWallet"}
-                  // className=""
                   className="w-full border-b-[1px] py-3 border-[#363636]"
                   onClick={() => setToggle(false)}
                 >
                   Users Wallet
                 </Link>
+
+                <Link
+                  to={"/changePercent"}
+                  className="w-full border-b-[1px] py-3 border-[#363636]"
+                  onClick={() => setToggle(false)}
+                >
+                  Change Percentage
+                </Link>
+
+                <Link
+                  to={"/changeLinkStatus"}
+                  className="w-full border-b-[1px] py-3 border-[#363636]"
+                  onClick={() => setToggle(false)}
+                >
+                  Change Link Status
+                </Link>
               </>
+            )}
+
+            {isLoggedIn && (
+              <Link
+                onClick={() => setToggle(false)}
+                to={"/invite"}
+                className="w-full border-b-[1px] py-3 border-[#363636]"
+              >
+                Invite
+              </Link>
             )}
 
             <Link
