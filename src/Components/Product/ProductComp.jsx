@@ -107,12 +107,7 @@ const ProductComp = () => {
                     </span>
 
                     {refferedBy?.percentage && (
-                      <span className="ml-2">
-                        $
-                        {Math.abs(
-                          p.price - (refferedBy.percentage / 100) * p.price
-                        )}
-                      </span>
+                      <span className="ml-2">${p.price}</span>
                     )}
                   </span>
                   <Rating

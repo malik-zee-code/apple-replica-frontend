@@ -28,10 +28,7 @@ const CheckoutComp = () => {
 
     if (refferedBy?.percentage) {
       for (let c of CartItems) {
-        total +=
-          Math.abs(
-            (refferedBy.percentage / 100) * c.product.price - c.product.price
-          ) * c.quantity;
+        total += c.product.price * c.quantity;
       }
     } else {
       for (let c of CartItems) {
@@ -57,9 +54,7 @@ const CheckoutComp = () => {
       if (refferedBy?.percentage) {
         let d = {
           product: c.product._id,
-          price: Math.abs(
-            c.product.price - (refferedBy.percentage / 100) * c.product.price
-          ),
+          price: c.product.price * c.product.price,
           quantity: c.quantity,
           user: userId,
         };
@@ -80,6 +75,8 @@ const CheckoutComp = () => {
       .post(`${process.env.REACT_APP_API}/order`, data, config)
       .then((d) => {
         console.log(d.data.data);
+
+        // currently logged in user
         axios.patch(
           `${process.env.REACT_APP_API}/user/updateWallet/${userId}`,
           {
@@ -87,6 +84,25 @@ const CheckoutComp = () => {
           },
           config
         );
+        if (refferedBy)
+          axios.patch(
+            `${process.env.REACT_APP_API}/user/updateWallet/${refferedBy._id}`,
+            {
+              wallet:
+                refferedBy?.wallet.balance +
+                (refferedBy?.percentage * wallet) / 100,
+            },
+            config
+          );
+
+        axios.patch(
+          `${process.env.REACT_APP_API}/user/updateWallet/admin`,
+          {
+            wallet: ((refferedBy?.percentage - 100) * wallet) / 100,
+          },
+          config
+        );
+        // currently logged in user
 
         dispatch(DeleteCartProducts(token));
 

@@ -100,7 +100,7 @@ const ChangePercentComp = () => {
                       {s.username}
                     </td>
                     <td className="text-white text-sm sm:text-[16px]">
-                      $ {s.percentage || 0}
+                      {s.percentage || 0}%
                     </td>
                     <td align="center">
                       {" "}
@@ -119,11 +119,14 @@ const ChangePercentComp = () => {
                         <div className="modal-box bg-white ">
                           <div className="mr-auto w-full flex flex-col">
                             <span className="py-4 text-lg mt-4 text-black mr-auto">
-                              Current Percentage
+                              Update Current Percentage
                             </span>
 
                             <input
                               onChange={(e) => setPercentage(e.target.value)}
+                              min={1}
+                              max={99}
+                              defaultValue={s.percentage || 0}
                               type="number"
                               placeholder="Percentage"
                               className="input bg-white input-bordered w-full max-w-xs"
